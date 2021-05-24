@@ -1,6 +1,20 @@
 import Fluent
 import Vapor
 
+extension Project {
+   struct Create: Content {
+       let name: String
+       let description: String
+       let assignmentURL: File
+       let testScriptURL: File
+   }
+}
+extension Project {
+    struct SubmitProject: Content {
+       let submittedProject: File
+   }
+}
+
 final class Project: Model, Content {
 
     static let schema = "projects"

@@ -1,0 +1,56 @@
+#extend("base"):
+    #export("content"):
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Project Tester</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5">
+            <div class="row align-items-center justify-content-center">
+            <div class="col-md-8">
+                <h1>#(title)</h1>
+            </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form class="form" method="POST" action="/projects" enctype="multipart/form-data">
+                        <div class="col mb-2">
+                            <label class="form-label" for="name">Title</label>
+                            <input class="form-control" type="text" id="name" placeholder="Title" name="name" autocomplete="name" required autofocus>
+                        </div>
+                        <div class="col mb-2">
+                            <label class="form-label" for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" placeholder="Enter text here..." required></textarea>
+                        </div>
+                        <div class="col mb-2">
+                            <label class="form-label" for="assignmentURL">Assigment file</label>
+                            <input class="form-control" type="file" id="assignmentURL" accept="application/pdf" name="assignmentURL" required>
+                        </div>
+                        <div class="col mb-2">
+                            <label class="form-label" for="testScriptURL">Test script</label>
+                            <input class="form-control" type="file" id="testScriptURL" accept=".sh" name="testScriptURL" required>
+                        </div>
+                            <div class="col mb-2">
+                            <input class="btn btn-primary mb-3" type="submit" value="Create project">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    #endexport
+#endextend

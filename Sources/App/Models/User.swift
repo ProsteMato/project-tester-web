@@ -8,17 +8,17 @@ final class User: Model, Content {
     @ID(key: .id)
     var id: UUID?
 
-    @Field(key: "name")
-    var name: String
+    @Field(key: "first_name")
+    var firstName: String
 
-    @Field(key: "surname")
-    var surname: String
+    @Field(key: "last_name")
+    var lastName: String
 
     @Field(key: "email")
     var email: String
 
-    @Field(key: "login")
-    var login: String
+    @Field(key: "password_hash")
+    var passwordHash: String
 
     @Children(for: \.$createdBy)
     var projects: [Project]
@@ -29,14 +29,24 @@ final class User: Model, Content {
     
     init() { }
 
-    init(id: UUID? = nil, name: String, surname: String, 
-         email: String, login: String) 
+    init(id: UUID? = nil, firstName: String, lastName: String, 
+         email: String, passwordHash: String) 
     {
         self.id = id
-        self.name = name
-        self.surname = surname
+        self.firstName = firstName
+        self.lastName = lastName
         self.email = email
-        self.login = login
+        self.passwordHash = passwordHash
     }
-    
 }
+
+extension User: ModelCredentialsAuthenticatable {
+    static let usernameKey = \User.$email
+    static let passwordHashKey = \User.$passwordHash
+
+    func verify(password: String) throws -> Bool {
+        try Bcrypt.verify(password, created: self.passwordHash)
+    }
+}
+
+extension User: ModelSessionAuthenticatable { }

@@ -1,0 +1,51 @@
+#extend("base"):
+    #export("content"):
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Project Tester</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5">
+            <div class="row mb-4">
+                <h1>Project Name: #(project.name)</h1>
+                <p>CreatedBy: #(project.createdBy.firstName) #(project.createdBy.lastName)</p>
+            </div>
+            <div class="row mb-4">
+                <h2>Description</h2>
+                <p>#(project.description)</p>
+            </div>
+            <div class="row">
+                <p><b>Assigment:</b> <a href="#(project.id)/assigment">Download</a>
+            </div>
+            <div class="row">
+                <p><b>Test Script:</b> <a href="#(project.id)/testscript">Download</a>
+            </div>
+            <div class="row">
+                <h3 class="mb-3">Odovzdanie projektu:</h3>
+                <form class="form" method="POST" action="#(project.id)" enctype="multipart/form-data">
+                    <div class="col-md-5 mb-2">
+                        <input class="form-control" type="file" accept=".zip" id="submittedProject" name="submittedProject" required>
+                    </div>
+                    <div class="col-md-5 mb-2">
+                        <input class="btn btn-primary mb-3" type="submit" value="Submit project">
+                    </div>
+                </form>
+            </div>
+        </div>
+    #endexport
+#endextend

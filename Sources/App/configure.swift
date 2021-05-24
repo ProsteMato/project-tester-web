@@ -16,14 +16,18 @@ public func configure(_ app: Application) throws {
         database: Environment.get("DATABASE_NAME") ?? "postgres"
     ), as: .psql)
 
-    app.migrations.add(CreateTodo())
+    app.sessions.use(.fluent)
+
+    app.routes.defaultMaxBodySize = "10mb"
+
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+
     app.migrations.add(CreateUser())
     app.migrations.add(CreateProject())
     app.migrations.add(CreateSubmittedProject())
+    app.migrations.add(SessionRecord.migration)
 
     app.views.use(.leaf)
-
-    
 
     // register routes
     try routes(app)
