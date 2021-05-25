@@ -27,7 +27,7 @@ struct ProjectContext: Content {
 
 struct ProjectWebContext: Content {
     let title: String
-    let projects: [Project]
+    let projects: [Project]?
 }
 
 
@@ -56,7 +56,7 @@ struct UserController: RouteCollection {
 
                 let projectsContext = ProjectWebContext(
                     title: "Projects",
-                    projects: projects
+                    projects: projects.isEmpty ? nil : projects
                 )
                 return req.view.render("projects", projectsContext)
 
